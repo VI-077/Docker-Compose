@@ -2,7 +2,6 @@
 
 echo "Waiting for MySQL to be ready at $DB_HOST:$DB_PORT..."
 
-# Wait for MySQL
 while ! nc -z "$DB_HOST" "$DB_PORT"; do
   sleep 1
 done
