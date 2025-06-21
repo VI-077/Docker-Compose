@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: AutoPartShop
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./AutoPartShop.sql:/docker-entrypoint-initdb.d/AutoPartShop.sql
+    ports:
+      - "3307:3306"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: AutoPartShop
+
+volumes:
+  db_data:
+
